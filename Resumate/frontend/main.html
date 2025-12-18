@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumate - Профессиональные IT-резюме</title>
+    <link rel="icon" type="image/x-icon" href="res/icon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body>
+    <!-- навигация -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo" id="homeLogo">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Resum<span class="logo-accent">ate</span></span>
+                </a>
+                <div class="nav-actions">
+                    <button class="btn btn-outline" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Войти
+                    </button>
+                    <button class="btn btn-primary" id="registerBtn">
+                        <i class="fas fa-user-plus"></i> Начать бесплатно
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- глав экран -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Создайте идеальное резюме</span>
+                    <br>для IT-специалиста
+                </h1>
+                <p class="hero-subtitle">
+                    15+ профессиональных шаблонов, оптимизированных под ATS системы. 
+                    Экспорт в PDF, умные рекомендации, аналитика эффективности.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-lg" id="createBtn">
+                        <i class="fas fa-plus-circle"></i> Создать резюме
+                    </button>
+                    <button class="btn btn-outline btn-lg" id="templatesBtn">
+                        <i class="fas fa-palette"></i> Посмотреть шаблоны
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">5,000+</div>
+                        <div class="stat-label">Созданных резюме</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Профессиональных шаблонов</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">97%</div>
+                        <div class="stat-label">Успешных собеседований</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- шаблоны -->
+    <section class="templates-section">
+        <div class="container">
+            <h2 class="section-title">Популярные шаблоны</h2>
+            <p class="section-subtitle">Выберите стиль, который подчеркнет ваши сильные стороны</p>            
+            <div class="text-center">
+                <button class="btn btn-outline btn-lg" id="viewAllTemplates">
+                    <i class="fas fa-eye"></i> Показать все шаблоны
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- окно регистрации/входа -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal auth-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-circle"></i> Добро пожаловать в Resumate</h3>
+                <button class="modal-close" id="closeAuthModal">&times;</button>
+            </div>
+            <div class="modal-tabs">
+                <button class="tab-btn active" data-tab="login">Вход</button>
+                <button class="tab-btn" data-tab="register">Регистрация</button>
+            </div>
+            <div class="modal-content">
+                <form id="loginForm" class="auth-form active">
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="loginEmail" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Пароль</label>
+                        <input type="password" id="loginPassword" placeholder="Ваш пароль" required>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Запомнить меня</span>
+                        </label>
+                        <a href="#" class="forgot-password">Забыли пароль?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Войти
+                    </button>
+                </form>
+                
+                <!-- Форма регистрации -->
+                <form id="registerForm" class="auth-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Имя</label>
+                            <input type="text" id="firstName" placeholder="Иван" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Фамилия</label>
+                            <input type="text" id="lastName" placeholder="Иванов" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="registerEmail" placeholder="email@example.com" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-lock"></i> Пароль</label>
+                            <input type="password" id="registerPassword" placeholder="Минимум 8 символов" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-lock"></i> Подтвердите пароль</label>
+                            <input type="password" id="confirmPassword" placeholder="Повторите пароль" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-briefcase"></i> Ваша специальность</label>
+                        <select id="userRole" required>
+                            <option value="">Выберите специальность</option>
+                            <option value="frontend">Frontend Developer</option>
+                            <option value="backend">Backend Developer</option>
+                            <option value="fullstack">Fullstack Developer</option>
+                            <option value="mobile">Mobile Developer</option>
+                            <option value="devops">DevOps Engineer</option>
+                            <option value="qa">QA Engineer</option>
+                            <option value="analyst">Data Analyst</option>
+                            <option value="designer">UX/UI Designer</option>
+                            <option value="pm">Project Manager</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox">
+                            <input type="checkbox" id="acceptTerms" required>
+                            <span>Я принимаю <a href="#">условия использования</a> и <a href="#">политику конфиденциальности</a></span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-user-plus"></i> Зарегистрироваться
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- окно шаблонов -->
+    <div class="modal-overlay" id="templatesModal">
+        <div class="modal modal-lg">
+            <div class="modal-header">
+                <h3><i class="fas fa-palette"></i> Выберите шаблон</h3>
+                <button class="modal-close" id="closeTemplatesModal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="templates-filter">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="templateSearch" placeholder="Поиск шаблона...">
+                    </div>
+                    <select id="templateCategory">
+                        <option value="all">Все категории</option>
+                        <option value="modern">Современные</option>
+                        <option value="classic">Классические</option>
+                        <option value="minimal">Минималистичные</option>
+                        <option value="creative">Креативные</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- конструктор резюме -->
+    <div class="builder-overlay" id="builder">
+        <div class="builder-container">
+            <div class="builder-header">
+                <div class="builder-header-left">
+                    <button class="btn btn-outline btn-sm" id="backToHome">
+                        <i class="fas fa-arrow-left"></i> На главную
+                    </button>
+                    <h3><i class="fas fa-edit"></i> Конструктор резюме</h3>
+                </div>
+                <div class="builder-header-right">
+                    <div class="template-selector">
+                        <select id="templateSelect" class="template-select">
+                            <option value="modern">Современный</option>
+                            <option value="classic">Классический</option>
+                            <option value="minimal">Минималистичный</option>
+                            <option value="creative">Креативный</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-outline" id="previewBtn">
+                        <i class="fas fa-eye"></i> Предпросмотр
+                    </button>
+                    <button class="btn btn-primary" id="saveResumeBtn">
+                        <i class="fas fa-save"></i> Сохранить
+                    </button>
+                    <button class="btn btn-success" id="exportBtn">
+                        <i class="fas fa-download"></i> PDF
+                    </button>
+                </div>
+            </div>
+            
+            <div class="builder-content">
+                <div class="editor-panel">
+                    <div class="editor-tabs">
+                        <button class="editor-tab active" data-tab="personal">
+                            <i class="fas fa-user"></i> Личная информация
+                        </button>
+                        <button class="editor-tab" data-tab="experience">
+                            <i class="fas fa-briefcase"></i> Опыт работы
+                        </button>
+                        <button class="editor-tab" data-tab="education">
+                            <i class="fas fa-graduation-cap"></i> Образование
+                        </button>
+                        <button class="editor-tab" data-tab="skills">
+                            <i class="fas fa-code"></i> Навыки
+                        </button>
+                        <button class="editor-tab" data-tab="projects">
+                            <i class="fas fa-project-diagram"></i> Проекты
+                        </button>
+                    </div>
+                <!-- информация о пользователе-->
+                    <div class="editor-content">
+                        <div class="editor-section active" id="personalSection">
+                            <h4><i class="fas fa-user"></i> Основная информация</h4>
+                            <div class="form-group">
+                                <label>Полное имя *</label>
+                                <input type="text" id="fullName" placeholder="Иванов Иван Иванович" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Должность *</label>
+                                <input type="text" id="position" placeholder="Senior Frontend Developer" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" id="email" placeholder="ivanov@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Телефон</label>
+                                    <input type="tel" id="phone" placeholder="+7 (999) 123-45-67">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Город</label>
+                                    <input type="text" id="city" placeholder="Москва">
+                                </div>
+                                <div class="form-group">
+                                    <label>Страна</label>
+                                    <input type="text" id="country" placeholder="Россия">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Ссылка на LinkedIn/GitHub</label>
+                                <input type="url" id="linkedin" placeholder="https://linkedin.com/in/username">
+                            </div>
+                            <div class="form-group">
+                                <label>О себе (краткое описание)</label>
+                                <textarea id="summary" rows="4" placeholder="Опытный фронтенд разработчик с 5-летним опытом..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- опыт работы -->
+                        <div class="editor-section" id="experienceSection">
+                            <h4><i class="fas fa-briefcase"></i> Опыт работы</h4>
+                            <div class="experience-container" id="experienceContainer">
+                                <div class="experience-item">
+                                    <div class="form-group">
+                                        <label>Должность *</label>
+                                        <input type="text" class="exp-position" placeholder="Senior Frontend Developer" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Компания *</label>
+                                        <input type="text" class="exp-company" placeholder="TechCompany Inc." required>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Дата начала *</label>
+                                            <input type="month" class="exp-start" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Дата окончания</label>
+                                            <input type="month" class="exp-end">
+                                            <label class="checkbox" style="margin-top: 5px;">
+                                                <input type="checkbox" class="exp-current"> По настоящее время
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Местоположение</label>
+                                        <input type="text" class="exp-location" placeholder="Москва, Россия">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Описание обязанностей и достижений *</label>
+                                        <textarea class="exp-description" rows="4" placeholder="• Разработка SPA приложений на React
+• Оптимизация производительности на 40%
+• Наставничество junior разработчиков" required></textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-outline btn-sm remove-experience">
+                                        <i class="fas fa-trash"></i> Удалить
+                                    </button>
+                                    <hr>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline btn-block" id="addExperienceBtn">
+                                <i class="fas fa-plus"></i> Добавить место работы
+                            </button>
+                        </div>
+                        
+                        <!-- образование -->
+                        <div class="editor-section" id="educationSection">
+                            <h4><i class="fas fa-graduation-cap"></i> Образование</h4>
+                            <div class="education-container" id="educationContainer">
+                                <div class="education-item">
+                                    <div class="form-group">
+                                        <label>Учебное заведение *</label>
+                                        <input type="text" class="edu-institution" placeholder="Московский Государственный Университет" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Степень/Специальность *</label>
+                                        <input type="text" class="edu-degree" placeholder="Бакалавр компьютерных наук" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Год начала</label>
+                                            <input type="number" class="edu-start" placeholder="2015" min="1900" max="2099">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Год окончания</label>
+                                            <input type="number" class="edu-end" placeholder="2019" min="1900" max="2099">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Дополнительная информация</label>
+                                        <textarea class="edu-details" rows="3" placeholder="Курсовые проекты, достижения, средний балл"></textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-outline btn-sm remove-education">
+                                        <i class="fas fa-trash"></i> Удалить
+                                    </button>
+                                    <hr>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline btn-block" id="addEducationBtn">
+                                <i class="fas fa-plus"></i> Добавить образование
+                            </button>
+                        </div>
+                        
+                        <!-- скилы -->
+                        <div class="editor-section" id="skillsSection">
+                            <h4><i class="fas fa-code"></i> Навыки</h4>
+                            <div class="form-group">
+                                <label>Технические навыки *</label>
+                                <div class="skills-input-container">
+                                    <input type="text" id="techSkillsInput" placeholder="JavaScript, React, TypeScript...">
+                                    <button type="button" class="btn btn-outline btn-sm" id="addTechSkill">
+                                        <i class="fas fa-plus"></i> Добавить
+                                    </button>
+                                </div>
+                                <div class="skills-tags" id="techSkillsTags"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Профессиональные навыки</label>
+                                <div class="skills-input-container">
+                                    <input type="text" id="softSkillsInput" placeholder="Командная работа, Лидерство...">
+                                    <button type="button" class="btn btn-outline btn-sm" id="addSoftSkill">
+                                        <i class="fas fa-plus"></i> Добавить
+                                    </button>
+                                </div>
+                                <div class="skills-tags" id="softSkillsTags"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Языки</label>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <input type="text" id="language1" placeholder="Русский" value="Русский">
+                                        <select id="languageLevel1">
+                                            <option value="native">Родной</option>
+                                            <option value="fluent">Свободно</option>
+                                            <option value="intermediate">Средний</option>
+                                            <option value="basic">Базовый</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="language2" placeholder="Английский">
+                                        <select id="languageLevel2">
+                                            <option value="fluent">Свободно</option>
+                                            <option value="intermediate">Средний</option>
+                                            <option value="basic">Базовый</option>
+                                            <option value="native">Родной</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- проекты -->
+                        <div class="editor-section" id="projectsSection">
+                            <h4><i class="fas fa-project-diagram"></i> Проекты</h4>
+                            <div class="projects-container" id="projectsContainer">
+                                <div class="project-item">
+                                    <div class="form-group">
+                                        <label>Название проекта *</label>
+                                        <input type="text" class="project-name" placeholder="Система управления задачами" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Роль в проекте</label>
+                                        <input type="text" class="project-role" placeholder="Frontend Developer">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Дата начала</label>
+                                            <input type="month" class="project-start">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Дата окончания</label>
+                                            <input type="month" class="project-end">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ссылка на проект</label>
+                                        <input type="url" class="project-url" placeholder="https://github.com/username/project">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Описание проекта *</label>
+                                        <textarea class="project-description" rows="4" placeholder="Разработал SPA приложение для управления задачами с использованием React и Redux..." required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Технологии</label>
+                                        <input type="text" class="project-tech" placeholder="React, TypeScript, Node.js">
+                                    </div>
+                                    <button type="button" class="btn btn-outline btn-sm remove-project">
+                                        <i class="fas fa-trash"></i> Удалить
+                                    </button>
+                                    <hr>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline btn-block" id="addProjectBtn">
+                                <i class="fas fa-plus"></i> Добавить проект
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- предпросмотр -->
+                <div class="preview-panel">
+                    <div class="preview-header">
+                        <h4><i class="fas fa-eye"></i> Предпросмотр резюме</h4>
+                        <div class="preview-actions">
+                            <button class="btn btn-outline btn-sm" id="refreshPreviewBtn">
+                                <i class="fas fa-sync-alt"></i> Обновить
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-content" id="resumePreview">
+                        <div class="preview-placeholder">
+                            <i class="fas fa-file-alt fa-4x" style="color: #4361ee; margin-bottom: 20px;"></i>
+                            <h3>Заполните информацию</h3>
+                            <p>Начните заполнять форму слева, чтобы увидеть предпросмотр вашего резюме</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Resum<span class="logo-accent">ate</span></span>
+                    </div>
+                    <p class="footer-description">
+                        Создавайте профессиональные резюме для IT-специалистов. 
+                        Быстро, просто, эффективно.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Продукт</h4>
+                    <a href="#features">Возможности</a>
+                    <a href="#" id="showTemplatesFooter">Шаблоны</a>
+                    <a href="#" id="pricingLink">Тарифы</a>
+                    <a href="#">Примеры</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Ресурсы</h4>
+                    <a href="#">Блог</a>
+                    <a href="#">База знаний</a>
+                    <a href="#">Частые вопросы</a>
+                    <a href="#">Поддержка</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2025 Resumate. Все права защищены.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                    <a href="#">Cookie</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- js подкл -->
+    <script src="templates.js"></script>
+    <script src="app.js"></script>
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Resumate загружен!');
+            
+            if (typeof Templates !== 'undefined') {
+                window.templates = new Templates();
+                window.templates.loadTemplatesToGrid();
+            }
+            
+            if (typeof initApp !== 'undefined') {
+                initApp();
+            }
+        });
+    </script>
+</body>
+</html>
